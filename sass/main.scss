@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* custom variables go here */
+
+// color theming
+$primary: #028cf0;
+$secondary: #c0f0ff;
+$light: #f7f7f7;
+$dark: #272727;
+$danger: #E65252;
+$info: #0180a8;
+$success: #40a14b;
+
+// navbar 
+/*$nav-pills-link-active-bg: $primary;
+nav > div > ul > li > a.nav-link.active{
+    color: white !important;
+}*/
+.navbar .navbar-collapse .navbar-nav .nav-item .nav-link.active::after {
+	border-bottom: 2px solid $primary;
+	bottom: 3px;
+	content: " ";
+	left: 0;
+	position: absolute;
+	right: 0;
+  }
+
+// button theming
+.btn-primary {
+	color: white !important;
+	font-size: 1.1rem !important;
+	padding: 0.4em 0 0.4em 0 !important;
+}
+.btn-outline-danger:hover,.btn-outline-dark:hover {
+    color: white !important;
+}
+
+// font theming
+$font-family-sans-serif: "Poppins";
+$headings-font-family: "Poppins";
+$headings-font-weight: 500;
+
+// form theming
+/*$btn-border-radius: 4em;
+$btn-padding-x: 3em;
+$btn-padding-y: .6em;*/
+
+// table theming
+$table-cell-padding-y: .5em;
+table thead tr {
+    font-family: "Poppins";
+}
+table thead tr th {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+table tbody tr td {
+    font-size: 0.9rem !important;
+    font-weight: 400;
+}
+.btn-no-border {
+    border: none !important;
+}
+td > .btn-no-border {
+    font-size: 0.9rem !important;
+}
+
+/*/ functions & variables for merging map variables
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+$custom-theme-colors: (
+    "altprimary": #1a1169,
+    "altsecondary": #9d6ff3
+);*/
+
+// import local compiled bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap';

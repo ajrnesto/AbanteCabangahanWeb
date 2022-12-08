@@ -1,0 +1,9 @@
+body, html {
+	background-color: #ecf3f7;
+	width: 100%;
+	height: 100%;
+}
+
+*:not(body) {
+	background-color: white;
+}
