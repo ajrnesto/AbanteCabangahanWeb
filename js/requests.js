@@ -59,12 +59,12 @@ function renderTable(uid, firstName, middleName, lastName, age, purok, residency
     buttonAction.textContent = utils.parseAction(status);
     buttonAction.classList.toggle('btn', true);
     buttonAction.classList.toggle('btn-no-border', true);
-    buttonAction.classList.toggle('btn-outline-primary', true);
+    buttonAction.classList.toggle('btn-primary', true);
     buttonAction.classList.toggle('col-12', true);
     if (status >= 2) {
         buttonAction.classList.toggle('col-12', true);
-        buttonAction.classList.toggle('btn-outline-primary', false);
-        buttonAction.classList.toggle('btn-outline-danger', true);
+        buttonAction.classList.toggle('btn-primary', false);
+        buttonAction.classList.toggle('btn-danger', true);
     }
     buttonAction.onclick = function() { btnAction(uid, status) };
 
