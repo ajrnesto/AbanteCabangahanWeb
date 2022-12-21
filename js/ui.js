@@ -4,6 +4,13 @@ export let etEmail = document.querySelector('#etEmail');
 export let etPassword = document.querySelector('#etPassword');
 export const errLogin = document.querySelector('#errLogin');
 export const tbodyRequests = document.querySelector('#tbodyRequests');
+export const tbodyNews = document.querySelector('#tbodyNews');
+// news modal
+export const modalNews = document.querySelector('#modalNews');
+export const tvAddNews = document.querySelector('#tvAddNews');
+export const etTitle = document.querySelector('#etTitle');
+export const etContent = document.querySelector('#etContent');
+export const btnSaveNews = document.querySelector('#btnSaveNews');
 // request navlinks
 export const navClearance = document.querySelector('#navClearance');
 export const navId = document.querySelector('#navId');

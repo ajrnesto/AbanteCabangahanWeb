@@ -4,6 +4,10 @@ body, html {
 	height: 100%;
 }
 
-*:not(body) {
+.nav, .navbar, .table-responsive {
 	background-color: white;
 }
+
+/* *:not(body, .modal) {
+	background-color: white;
+} */

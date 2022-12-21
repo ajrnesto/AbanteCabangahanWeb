@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests</title>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <script type="module" src="/js/news.js"></script>
+</head>
+<body>
+    <!-- navigation bar -->
+    <nav class="navbar navbar-expand-lg mb-2 shadow-sm px-4">
+        <a class="navbar-brand" href="news.html"><img src="img/banner.png" height="50px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-2 my-auto text-primary"><a class="nav-link active" href="#">MANAGE NEWS</a></li>
+                <li class="nav-item mx-4 my-auto"><a class="nav-link" aria-current="page" href="clearance.html">MANAGE REQUESTS</a></li>
+                <!--li class="nav-item"><img alt="Avatar" id="imgAvatar"></li-->
+                <li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- content -->
+    <div class="rounded p-3 table-responsive shadow-sm mx-4 mt-4">
+		<div class="row">
+			<div class="col my-auto">
+				<h4 id="tabTitle" class="mt-4 mb-3">News List</h4>
+			</div>
+			<div class="col my-auto">
+				<button id="btnAddNews" onclick="loadEditNewsModal(null)" type="button" class="btn btn btn-primary float-end px-4" data-bs-toggle="modal" data-bs-target="#modalNews">ADD NEWS</button>
+			</div>
+		</div>
+
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-1">Date</th>
+                    <th scope="col" class="col-3">Title</th>
+                    <th scope="col" class="col-4">Content</th>
+                    <th scope="col" class="col-2">Author</th>
+                    <th scope="col" class="col-2 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyNews"></tbody>
+        </table>
+    </div>
+
+	<!-- Modal -->
+	<div id="modalNews" class="modal fade" tabindex="-1" aria-labelledby="tvAddNews" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 id="tvAddNews" class="modal-title fs-5">Add News</h1>
+				<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div>
+					<label for="etTitle" class="form-label">Title</label>
+					<input id="etTitle" type="text" class="form-control" required>
+				</div>
+				<div>
+					<label for="etContent" class="form-label">Content</label>
+					<textarea id="etContent" class="form-control"rows="5" required></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-danger py-2" data-bs-dismiss="modal">Cancel</button>
+				<button id="btnSaveNews" type="button" class="btn btn-primary px-3" data-bs-dismiss="modal">Publish News</button>
+			</div>
+		</div>
+		</div>
+	</div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
