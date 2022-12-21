@@ -9,8 +9,7 @@ export const navClearance = document.querySelector('#navClearance');
 export const navId = document.querySelector('#navId');
 export const navResidency = document.querySelector('#navResidency');
 export const navIndigency = document.querySelector('#navIndigency');
-export const navBusinessPermit = document.querySelector('#navBusinessPermit');
-export const tabTitle = document.querySelector('#tabTitle');
+export const navPermit = document.querySelector('#navPermit');
 
 export function generateAvatar() {
     const imgAvatar = document.querySelector('#imgAvatar');
