@@ -6,7 +6,7 @@ import { errLogin } from '../js/ui.js';
 // on load, check if someone is signed in
 window.addEventListener("load", () => {
     if (auth.currentUser != null) {
-        window.location = "../requests.html";
+        window.location = "../clearance.html";
     }
 });
 
@@ -27,7 +27,7 @@ onAuthStateChanged(auth, user => {
                 }
         
                 // if user is admin, allow access and redirect
-                window.location = "../requests.html";
+                window.location = "../clearance.html";
             })
             .catch((err) => {
                 console.error(err);

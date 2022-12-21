@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests</title>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <script type="module" src="/js/business.js"></script>
+</head>
+<body>
+    <!-- navigation bar -->
+    <nav class="navbar navbar-expand-lg mb-2 shadow-sm px-4">
+        <a class="navbar-brand" href="news.html"><img src="img/banner.png" height="50px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-2 my-auto text-primary"><a class="nav-link" href="news.html">MANAGE NEWS</a></li>
+                <li class="nav-item mx-4 my-auto"><a class="nav-link active" aria-current="page" href="#">MANAGE REQUESTS</a></li>
+                <!--li class="nav-item"><img alt="Avatar" id="imgAvatar"></li-->
+                <li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- content -->
+    <div class="rounded p-3 table-responsive shadow-sm mx-4 mt-4">
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+			  	<a class="nav-link" id="navClearance" href="clearance.html">CLEARANCE</a>
+			</li>
+			<li class="nav-item">
+			  	<a class="nav-link" id="navId" href="id.html">RESIDENT'S ID</a>
+			</li>
+			<li class="nav-item">
+			  	<a class="nav-link" id="navResidency" href="residency.html">RESIDENCY</a>
+			</li>
+			<li class="nav-item">
+			  	<a class="nav-link" id="navIndigency" href="indigency.html">INDIGENCY</a>
+			</li>
+			<li class="nav-item">
+			  	<a class="nav-link active" id="navBusinessPermit" aria-current="page" href="#">BUSINESS PERMIT</a>
+			</li>
+		</ul>
+		
+		<h4 id="tabTitle" class="mt-4 mb-3">Business Permit Requests</h4>
+
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-1">First Name</th>
+                    <th scope="col" class="col-1">Middle Name</th>
+                    <th scope="col" class="col-1">Last Name</th>
+                    <th scope="col" class="col-2">Business Name</th>
+                    <th scope="col" class="col-1">Location</th>
+                    <th scope="col" class="col-1">Date</th>
+                    <th scope="col" class="col-1">Status</th>
+                    <th scope="col" class="col-1 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyRequests"></tbody>
+        </table>
+    </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

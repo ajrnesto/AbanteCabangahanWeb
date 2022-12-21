@@ -4,7 +4,7 @@ export function parseDate(millis) {
         {
             year: '2-digit',
             month: '2-digit',
-            day: '2-digit',
+            day: '2-digit'
             // weekday:"long",
             // hour: '2-digit',
             // hour12: true,
@@ -15,7 +15,7 @@ export function parseDate(millis) {
 }
 
 export function parseFullName(firstName, middleName, lastName) {
-    return firstName + " " + middleName.substring(0, 1) + ". " + lastName;
+    return firstName + " " + middleName.substring(0, 1).toUpperCase() + ". " + lastName;
 }
 
 export function parseStatus(status) {

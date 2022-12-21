@@ -7,7 +7,7 @@
     <title>Requests</title>
     <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/global.css">
-    <script type="module" src="/js/requests.js"></script>
+    <script type="module" src="/js/indigency.js"></script>
 </head>
 <body>
     <!-- navigation bar -->
@@ -30,36 +30,35 @@
     <div class="rounded p-3 table-responsive shadow-sm mx-4 mt-4">
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
-			  	<a class="nav-link" id="navClearance" href="#">CLEARANCE</a>
+			  	<a class="nav-link" id="navClearance" href="clearance.html">CLEARANCE</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" id="navId" href="#">RESIDENT'S ID</a>
+			  	<a class="nav-link" id="navId" href="id.html">RESIDENT'S ID</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" id="navResidency" href="#">RESIDENCY</a>
+			  	<a class="nav-link" id="navResidency" href="residency.html">RESIDENCY</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" id="navIndigency" href="#">INDIGENCY</a>
+			  	<a class="nav-link active" id="navIndigency" aria-current="page" href="#">INDIGENCY</a>
 			</li>
 			<li class="nav-item">
-			  	<a class="nav-link" id="navBusinessPermit" href="#">BUSINESS PERMIT</a>
+			  	<a class="nav-link" id="navBusinessPermit" href="business.html">BUSINESS PERMIT</a>
 			</li>
 		</ul>
 		
-		<h4 id="tabTitle" class="mt-4 mb-3">Barangay Clearance Requests</h4>
+		<h4 id="tabTitle" class="mt-4 mb-3">Certificate of Indigency Requests</h4>
 
         <table class="table align-middle">
             <thead>
                 <tr>
-                    <th scope="col" class="col-2">Name</th>
+                    <th scope="col" class="col-1">First Name</th>
+                    <th scope="col" class="col-1">Middle Name</th>
+                    <th scope="col" class="col-1">Last Name</th>
                     <th scope="col" class="col-1">Age</th>
-                    <th scope="col" class="col-1">Address</th>
-                    <th scope="col" class="col-2">Residency</th>
-                    <th scope="col" class="col-2">Purpose</th>
+                    <th scope="col" class="col-1">Civil Status</th>
                     <th scope="col" class="col-1">Date</th>
                     <th scope="col" class="col-1">Status</th>
-                    <!--th scope="col" class="col-2 text-center">Action</th-->
-                    <th scope="col" class="col-2 text-center">Action</th>
+                    <th scope="col" class="col-1 text-center">Action</th>
                 </tr>
             </thead>
             <tbody id="tbodyRequests"></tbody>
