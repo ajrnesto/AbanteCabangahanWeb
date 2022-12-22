@@ -11,6 +11,10 @@ export const tvAddNews = document.querySelector('#tvAddNews');
 export const etTitle = document.querySelector('#etTitle');
 export const etContent = document.querySelector('#etContent');
 export const btnSaveNews = document.querySelector('#btnSaveNews');
+// delete modal
+export const modalDelete = document.querySelector('#modalDelete');
+export const tvDelete = document.querySelector('#tvDelete');
+export const btnDelete = document.querySelector('#btnDelete');
 // request navlinks
 export const navClearance = document.querySelector('#navClearance');
 export const navId = document.querySelector('#navId');

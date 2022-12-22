@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
 import { ref, query, orderByChild, equalTo, get, set, push, update, child, remove, onValue, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js';
 import { db, auth } from '../js/firebase.js';
-import { btnLogout, tbodyNews, modalNews, tvAddNews, etTitle, etContent, btnSaveNews } from '../js/ui.js';
+import { btnLogout, tbodyNews, modalNews, tvAddNews, etTitle, etContent, btnSaveNews, tvDelete, modalDelete, btnDelete } from '../js/ui.js';
 import  * as utils from '../js/utils.js';
 
 // listen for log out button
@@ -27,22 +27,35 @@ window.addEventListener("load", () => {
 	//getNewPendingRequestCounts();
 });
 
-window.loadEditNewsModal = loadEditNewsModal;
-function loadEditNewsModal(newsUid) { // changes modal contents
+window.showEditNewsModal = showEditNewsModal;
+function showEditNewsModal(newsUid, newsTitle, newsContent) { // changes modal contents
 	// null newsUid => new news
 	if (newsUid == null) {
+		etTitle.value = "";
+		etContent.value = "";
+
 		tvAddNews.textContent = "Add News";
 		btnSaveNews.textContent = "Publish News";
 	}
 	else {
+		// update modal UI
+		const myModal = new bootstrap.Modal('#modalNews', null);
 		tvAddNews.textContent = "Edit News";
 		btnSaveNews.textContent = "Save Changes";
+		myModal.show();
+
+		etTitle.value = newsTitle;
+		etContent.value = newsContent;
 	}
 
-	btnSaveNews.addEventListener("click", function() {saveModalNews(newsUid)}, {once: true});
+	btnSaveNews.addEventListener("click", function() {saveNews(newsUid)}, {once: true});
 }
 
-function saveModalNews(newsUid) { // updates firebase data
+function saveNews(newsUid) { // updates firebase data
+	if (etTitle.value == "" || etContent.value == "") {
+		return;
+	}
+
 	if (newsUid == null) {
 		// add new news
 		const refNews = ref(db, "news");
@@ -53,16 +66,21 @@ function saveModalNews(newsUid) { // updates firebase data
 			title: etTitle.value,
 			content: etContent.value,
 			author: "Abante Bonawon",
-			timestamp: 0
+			timestamp: serverTimestamp()
 		}
 
 		update(child(refNews, newNewsKey), newsData);
 	}
-	else if (newsUid == 1) {
+	else {
 		// edit news
-		const refNewNews = ref(db, "news/"+newsUid);
+		const refSelectedNews = ref(db, "news/"+newsUid);
 
-		set(refContainers, parseInt(etPrice.value));
+		const newsData = {
+			title: etTitle.value,
+			content: etContent.value
+		}
+
+		update(refSelectedNews, newsData);
 	}
 
 	etTitle.value = "";
@@ -70,10 +88,10 @@ function saveModalNews(newsUid) { // updates firebase data
 }
 
 function getNewsData() {
-	const refId = ref(db, "news");
+	const refNews = ref(db, "news");
 
 	// show clearance table (or div) and hide all other tables (or divs)
-    onValue(refId, (snapAllNews) => {
+    onValue(refNews, (snapAllNews) => {
         // clear
         tbodyNews.innerHTML = '';
         // listen for request changes
@@ -101,42 +119,63 @@ function renderTable(uid, title, content, author, timestamp) {
     const buttonDelete = document.createElement('button');
 
     cellTitle.innerHTML = title;
+    cellTitle.classList.toggle('news-title', true);
     cellContent.innerHTML = content;
+    cellContent.classList.toggle('news-content', true);
     cellAuthor.innerHTML = author;
-	cellDate.innerHTML = utils.parseDate(timestamp);
+	cellDate.innerHTML = utils.parseDateTime(timestamp);
 
     buttonEdit.type = 'button';
     buttonEdit.textContent = "Edit";
     buttonEdit.classList.toggle('btn', true);
     buttonEdit.classList.toggle('btn-no-border', true);
     buttonEdit.classList.toggle('btn-primary', true);
+    buttonEdit.classList.toggle('col-md-6', true);
     buttonEdit.classList.toggle('col-12', true);
-    buttonEdit.onclick = function() { editNews(uid) };
+    buttonEdit.onclick = function() { showEditNewsModal(uid, title, content) };
 
     buttonDelete.type = 'button';
-    buttonDelete.textContent = "Edit";
+    buttonDelete.textContent = "Delete";
     buttonDelete.classList.toggle('btn', true);
     buttonDelete.classList.toggle('btn-no-border', true);
 	buttonDelete.classList.toggle('btn-danger', true);
+    buttonDelete.classList.toggle('col-md-6', true);
     buttonDelete.classList.toggle('col-12', true);
-    buttonDelete.onclick = function() { deleteNews(uid) };
+    buttonDelete.onclick = function() { deleteNews(uid, title) };
 
     rowId.appendChild(cellDate);
     rowId.appendChild(cellTitle);
     rowId.appendChild(cellContent);
     rowId.appendChild(cellAuthor);
     rowId.appendChild(cellAction);
-    cellAction.appendChild(buttonEdit).appendChild(buttonDelete);
+    cellAction.appendChild(buttonEdit);
+	cellAction.appendChild(buttonDelete);
 
-    tbodyNews.appendChild(rowId);
+    tbodyNews.prepend(rowId);
 }
 
-function editNews(newsUid) {
-    // reference news
-    const refNews = ref(db, "news");
+function editNews(uid) {
+	// update modal UI
+	const myModal = new bootstrap.Modal('#modalDelete', null);
+	tvDelete.textContent = "Delete \""+title+"\"?";
+	myModal.show();
+
+	// delete news if confirmed
+    const refSelectedNews = ref(db, "news/"+uid);
+	btnDelete.onclick = function() {
+		remove(refSelectedNews);
+	}
 }
 
-function deleteNews(newsUid) {
-    // reference news
-    const refNews = ref(db, "news");
+function deleteNews(uid, title) {
+	// update modal UI
+	const myModal = new bootstrap.Modal('#modalDelete', null);
+	tvDelete.textContent = "Delete \""+title+"\"?";
+	myModal.show();
+
+	// delete news if confirmed
+    const refSelectedNews = ref(db, "news/"+uid);
+	btnDelete.onclick = function() {
+		remove(refSelectedNews);
+	}
 }

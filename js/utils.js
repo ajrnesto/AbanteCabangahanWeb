@@ -14,6 +14,38 @@ export function parseDate(millis) {
     return formattedDate;
 }
 
+export function parseTime(millis) {
+    const date = new Date(millis);
+    const formattedDate = date.toLocaleString('en-US',
+        {
+            // year: '2-digit',
+            // month: '2-digit',
+            // day: '2-digit'
+            // weekday:"long",
+            hour: '2-digit',
+            hour12: true,
+            minute:'2-digit',
+            // second:'2-digit'
+        });
+    return formattedDate;
+}
+
+export function parseDateTime(millis) {
+    const date = new Date(millis);
+    const formattedDate = date.toLocaleString('en-US',
+        {
+             year: '2-digit',
+             month: '2-digit',
+             day: '2-digit',
+            // weekday:"long",
+            hour: '2-digit',
+            hour12: true,
+            minute:'2-digit'
+            // second:'2-digit'
+        });
+    return formattedDate;
+}
+
 export function parseFullName(firstName, middleName, lastName) {
     return firstName + " " + middleName.substring(0, 1).toUpperCase() + ". " + lastName;
 }

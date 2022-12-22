@@ -7,6 +7,7 @@
     <title>Requests</title>
     <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/news.css">
     <script type="module" src="/js/news.js"></script>
 </head>
 <body>
@@ -33,16 +34,16 @@
 				<h4 id="tabTitle" class="mt-4 mb-3">News List</h4>
 			</div>
 			<div class="col my-auto">
-				<button id="btnAddNews" onclick="loadEditNewsModal(null)" type="button" class="btn btn btn-primary float-end px-4" data-bs-toggle="modal" data-bs-target="#modalNews">ADD NEWS</button>
+				<button id="btnAddNews" onclick="showEditNewsModal(null)" type="button" class="btn btn btn-primary float-end px-4" data-bs-toggle="modal" data-bs-target="#modalNews">ADD NEWS</button>
 			</div>
 		</div>
 
         <table class="table align-middle">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1">Date</th>
+                    <th scope="col" class="col-2">Date</th>
                     <th scope="col" class="col-3">Title</th>
-                    <th scope="col" class="col-4">Content</th>
+                    <th scope="col" class="col-3">Content</th>
                     <th scope="col" class="col-2">Author</th>
                     <th scope="col" class="col-2 text-center">Action</th>
                 </tr>
@@ -53,7 +54,7 @@
 
 	<!-- Modal -->
 	<div id="modalNews" class="modal fade" tabindex="-1" aria-labelledby="tvAddNews" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h1 id="tvAddNews" class="modal-title fs-5">Add News</h1>
@@ -62,20 +63,38 @@
 			<div class="modal-body">
 				<div>
 					<label for="etTitle" class="form-label">Title</label>
-					<input id="etTitle" type="text" class="form-control" required>
+					<textarea id="etTitle" class="form-control"rows="2" required></textarea>
 				</div>
 				<div>
 					<label for="etContent" class="form-label">Content</label>
-					<textarea id="etContent" class="form-control"rows="5" required></textarea>
+					<textarea id="etContent" class="form-control"rows="12" required></textarea>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-danger py-2" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-light py-2" data-bs-dismiss="modal">Cancel</button>
 				<button id="btnSaveNews" type="button" class="btn btn-primary px-3" data-bs-dismiss="modal">Publish News</button>
 			</div>
 		</div>
 		</div>
 	</div>
+
+	<div id="modalDelete" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Confirm news deletion</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p id="tvDelete">Delete this news?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light py-2" data-bs-dismiss="modal">Cancel</button>
+				<button id="btnDelete" type="button" class="btn btn-danger px-3" data-bs-dismiss="modal">Delete</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
