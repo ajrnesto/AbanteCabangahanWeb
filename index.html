@@ -4,42 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abante Bonawon</title>
+    <title>Ariba! Cabangahan</title>
     <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/index.css">
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     <script type="module" src="/js/index.js"></script>
 </head>
-<body>
+<body class="bg-light">
     <div class="container col-4">
         <div class="col mb-4">
 			<div class="row align-items-center text-center">
 				<div class="col">
-					<img src="img/seal.png" class="mb-4" />
+					<h1 class="text-primary col-auto ms" style="font-family: Tilt Neon; font-size: 3.4rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;">Ariba!<span class="text-danger">Cabangahan</span></h1>
 				</div>
-				<div class="col">
-					<h1 class="text-primary" style="font-weight: 300; font-size: 2.6rem;">ABANTE!</h1>
-					<h1 class="text-primary" style="font-weight: 700; font-size: 1.8rem;">BONAWON</h1>
-					<h1 class="text-primary" style="font-weight: 300; font-size: 1.1rem;">Barangay Services</h1>
+				<div class="col mb-4">
+					<h1 class="text-primary" style="font-size: 1.5rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;"">Administrator Panel</h1>
 				</div>
 			</div>
 		</div>
 		<div class="col">
 			<form id="loginForm">
-				<div class="mb-4">
-					<h1 class="text-primary" style="font-weight: 300; font-size: 1.8rem;">Welcome</h1>
+				<div class="input-group has-validation col-12 col-sm-6 mb-2">
+					<span class="input-group-text"><i class="fi fi-sr-at" style="font-size: 1.2em; color: #808080"></i></span>
+					<div class="form-floating">
+						<input type="email" class="form-control email-validator" id="etLoginEmail" placeholder="Email Address" required>
+						<label for="etLoginEmail">Email Address</label>
+					</div>
+					<div class="invalid-feedback">
+						Please enter an email address.
+					</div>
 				</div>
-				<div class="mb-3">
-					<label for="etEmail" class="form-label">Email address</label>
-					<input id="etEmail" type="email" class="form-control" required>
-				</div>
-				<div>
-					<label for="etPassword" class="form-label">Password</label>
-					<input id="etPassword" type="password" class="form-control" required>
+				<div class="input-group has-validation col-12 col-sm-6 mb-2">
+					<span class="input-group-text"><i class="fi fi-sr-lock" style="font-size: 1.2em; color: #808080"></i></span>
+					<div class="form-floating">
+						<input type="password" class="form-control password-validator" id="etLoginPassword" placeholder="Password" required>
+						<label for="etLoginPassword">Password</label>
+					</div>
+					<div class="invalid-feedback">
+						Please enter a password.
+					</div>
 				</div>
 				<div class="text-error text-danger mt-3" id="errLogin">
-					Your password is incorrect or this email is not associated with an account.
+					*The email or password that you have entered was incorrect.
 				</div>
-				<button type="button" id="btnLogin" class="btn btn-primary col-12 mt-4">Log in</button>
+				<div class="text-error text-danger mt-3" id="errNotAdmin">
+					*This account does not have administrator privileges.
+				</div>
+				<div class="col-12">
+					<button type="button" id="btnLogin" class="col-12 btn btn-primary mx-auto mt-4">Log in</button>
+				</div>
 			</form>
 		</div>
     </div>

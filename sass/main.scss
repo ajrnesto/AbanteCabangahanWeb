@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700;800;900&family=Tilt+Neon&display=swap');
 
 /* custom variables go here */
 
 // color theming
-$primary: #028cf0;
-$secondary: #c0f0ff;
-$light: #f7f7f7;
+$primary: #3d405b;
+$secondary: #3d405b;
+$light: #f4f1de;
 $dark: #272727;
-$danger: #E65252;
-$info: #0180a8;
-$success: #40a14b;
+$danger: #e07a5f;
+$info: #3d405b;
+$success: #81b29a;
 
 // navbar 
 /*$nav-pills-link-active-bg: $primary;
@@ -36,9 +36,9 @@ nav > div > ul > li > a.nav-link.active{
 }
 
 // font theming
-$font-family-sans-serif: "Poppins";
-$headings-font-family: "Poppins";
-$headings-font-weight: 500;
+$font-family-sans-serif: "Gabarito";
+$headings-font-family: "Gabarito";
+$headings-font-weight: 300;
 
 // form theming
 /*$btn-border-radius: 4em;
@@ -48,7 +48,7 @@ $btn-padding-y: .6em;*/
 // table theming
 $table-cell-padding-y: .5em;
 table thead tr {
-    font-family: "Poppins";
+    font-family: "Gabarito";
 }
 table thead tr th {
     font-size: 0.9rem;

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/news.css">
+    <script type="module" src="/js/announcements.js"></script>
+</head>
+
+<body class="bg-light">
+  <!-- navigation bar -->
+  <nav class="navbar bg-primary navbar-expand-lg mb-2 shadow-sm px-4">
+		<div class="col">
+			<h1 class="text-light col-auto ms" style="font-family: Tilt Neon; font-size: 1.4rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;">Ariba!<span class="text-danger">Cabangahan</span></h1>
+		</div>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="dashboard.html">DASHBOARD</a></li>
+					<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="blotter.html">CRIMES/INCIDENTS</a></li>
+					<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="incidents.html">BLOTTER</a></li>
+					<li class="nav-item mx-2 my-auto"><a class="nav-link nav-active text-white" aria-current="page" href="#">ANNOUNCEMENTS</a></li>
+					<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="clearance.html">DOCUMENT REQUESTS</a></li>
+					<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="users.html">USERS</a></li>
+					<li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+				</ul>
+		</div>
+	</nav>
+
+  <!-- content -->
+  <div class="rounded p-3 table-responsive shadow-sm mx-4 mt-4">
+		<h4 id="tabTitle" class="col d-flex justify-content-center">Manage Barangay Announcements</h4>
+		<div class="col my-auto d-flex justify-content-center mt-4">
+			<button id="btnAddAnnouncement" onclick="showEditAnnouncementModal(null, null, null)" type="button" class="btn btn btn-primary px-4 me-3" data-bs-toggle="modal" data-bs-target="#modalAnnouncement">Make New Announcement</button>
+			<button id="btnOpenArchive" type="button" class="btn btn btn-light px-4" data-bs-toggle="modal" data-bs-target="#modalArchive">Archives</button>
+		</div>
+
+		<hr>
+      <table class="table align-middle">
+          <thead>
+              	<tr>
+					<th scope="col" class="col-1">Cover</th>
+					<th scope="col" class="col-3">Title</th>
+					<th scope="col" class="col-3">Details</th>
+					<th scope="col" class="col-auto">Date Posted</th>
+					<!--th scope="col" class="col-auto">Author</th-->
+					<th scope="col" class="col-auto">Action</th>
+              </tr>
+          </thead>
+          <tbody id="tbodyAnnouncement"></tbody>
+      </table>
+  </div>
+
+	<!-- Modal -->
+	<div id="modalAnnouncement" class="modal fade" tabindex="-1" aria-labelledby="tvAddAnnouncement" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 id="tvAddAnnouncement" class="modal-title fs-5">Add Announcement</h1>
+				<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="row col-6 mx-auto">
+					<label for="imgHolder">Announcement Banner Photo</label>
+					<div class="row col-12">
+						<div class="col-12 mb-2">
+							<img id="imgHolder" class="upload-image-placeholder rounded border-1 col-12" alt="" src="https://via.placeholder.com/300x250?text=Cover+Photo">
+						</div>
+						<div class="col-12">
+							<div class="input-group col-12 custom-file-button">
+								<label id="btnUploadImageLabel" class="input-group-text col-12 rounded text-dark justify-content-center border-1" for="btnUploadImage">Upload Banner Photo</label>
+								<input type="file" accept="image/jpeg, image/png, image/jpg" class="form-control d-none" id="btnUploadImage">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<label for="etAnnouncementTitle" class="form-label">Announcement Title</label>
+					<textarea id="etAnnouncementTitle" class="form-control"rows="2" required></textarea>
+				</div>
+				<div>
+					<label for="etAnnouncementDetails" class="form-label">Announcement Details</label>
+					<textarea id="etAnnouncementDetails" class="form-control"rows="10" required></textarea>
+				</div>
+				<div class="d-none">
+					<label for="etKeywords" class="form-label">Keywords/Tags (Separate by comma ",")</label>
+					<input type="text" id="etKeywords" class="form-control" rows="1" required></input>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light py-2" data-bs-dismiss="modal">Cancel</button>
+				<button id="btnSaveAnnouncement" type="button" class="btn btn-primary px-3" data-bs-dismiss="modal">Add Announcement</button>
+			</div>
+		</div>
+		</div>
+	</div>
+
+	<div id="modalDelete" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+				<h5 id="modalDeleteTitle" class="modal-title">Confirm announcement deletion</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p id="tvDelete">Delete this announcement?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light py-2" data-bs-dismiss="modal">Cancel</button>
+				<button id="btnDelete" type="button" class="btn btn-danger px-3" data-bs-dismiss="modal">Delete</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<div id="modalViewImage" class="modal fade" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title"></h1>
+					<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body bg-light">
+					<img id="imgId" class="rounded col-12">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="modalArchive" class="modal fade" tabindex="-1">
+	  <div class="modal-dialog modal-xl">
+		  <div class="modal-content">
+			  <div class="modal-header">
+				  <h5 id="modalArchiveTitle" class="modal-title">Archive</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body">
+				  <table class="table align-middle">
+					  <thead>
+						  <tr>
+							  <th scope="col" class="col-auto">Date</th>
+								<th scope="col" class="col-1">Cover</th>
+							  <th scope="col" class="col-3">Title</th>
+							  <th scope="col" class="col-3">Content</th>
+							  <!-- <th scope="col" class="col-auto">Author</th> -->
+							  <th scope="col" class="col-auto">Action</th>
+						  </tr>
+					  </thead>
+					  <tbody id="tbodyArchive"></tbody>
+				  </table>
+			  </div>
+		  </div>
+	  </div>
+	</div>
+
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

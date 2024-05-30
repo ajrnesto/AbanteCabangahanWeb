@@ -1,52 +1,66 @@
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
-import { ref, get } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
 import { auth, db } from '../js/firebase.js';
-import { errLogin } from '../js/ui.js';
+import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js';
+import { authenticate, validate, invalidate } from '../js/utils.js';
 
-// on load, check if someone is signed in
-window.addEventListener("load", () => {
-    if (auth.currentUser != null) {
-        window.location = "../requests.html";
-    }
-});
+const errLogin = document.querySelector('#errLogin');
+const errNotAdmin = document.querySelector('#errNotAdmin');
+const btnLogin = document.querySelector('#btnLogin');
 
-// listen for sign-ins
+const etLoginEmail = document.querySelector('#etLoginEmail');
+const etLoginPassword = document.querySelector('#etLoginPassword');
+
+const emailValidator = document.querySelectorAll('.email-validator');
+const passwordValidator = document.querySelectorAll('.password-validator');
+
 onAuthStateChanged(auth, user => {
-    if (user) { // if someone logged in, check userType
-        const refUserType = ref(db, "users/"+user.uid+"/userType");
+	if (!user) {
+		return;
+	}
 
-        get(refUserType)
-            .then((snapshot) => {
-                const userType = snapshot.val();
-                
-                if (userType != 1) {
-                    signOut(auth);
-					errLogin.textContent = "Your account is not an admin!";
-					errLogin.style.display = "block";
-                    return;
-                }
-        
-                // if user is admin, allow access and redirect
-                window.location = "../requests.html";
-            })
-            .catch((err) => {
-                console.error(err);
-        });
-    } 
+	const userTypeRef = doc(db, "users", user.uid);
+	getDoc(userTypeRef).then(userSnap => {
+		const userType = userSnap.data().userType;
+		if (userType == 0) {
+			errNotAdmin.style.display = "block";
+			invalidate(emailValidator);
+			invalidate(passwordValidator);
+			signOut(auth)
+			return;
+		}
+		else if (userType == 1) {
+			window.location = "../clearance.html";
+
+			errNotAdmin.style.display = "none";
+			validate(emailValidator);
+			validate(passwordValidator);
+		}
+		else if (userType == 2 || userType == 3) {
+			window.location = "../appointments.html";
+		}
+	});
 });
 
-// listen for the log in button
 btnLogin.addEventListener("click", () => {
-    const email = etEmail.value;
-    const password = etPassword.value;
+    const email = etLoginEmail.value;
+    const password = etLoginPassword.value;
 
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // let onAuthStateChanged handle the authentication validation
-    })
-    .catch((error) => {
-        // display error text
-		errLogin.textContent = "Your password is incorrect or this email is not associated with an account.";
-        errLogin.style.display = "block";
-    });
+	
+	setPersistence(auth, browserSessionPersistence).then(() => {
+		return signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+		  errLogin.style.display = "none";
+		  // let onAuthStateChanged handle the authentication validation
+		})
+		.catch((error) => {
+		  // display error text
+			invalidate(emailValidator);
+			invalidate(passwordValidator);
+		  errLogin.style.display = "block";
+		});
+	})
+	.catch((error) => {
+		const errorCode = error.code;
+		const errorMessage = error.message;
+	});
 });

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Blotter</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/news.css">
+    <script type="module" src="/js/blotter.js"></script>
+</head>
+
+<body class="bg-light">
+    <!-- navigation bar -->
+    <nav class="navbar bg-primary navbar-expand-lg mb-2 shadow-sm px-4">
+			<div class="col">
+				<h1 class="text-light col-auto ms" style="font-family: Tilt Neon; font-size: 1.4rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;">Ariba!<span class="text-danger">Cabangahan</span></h1>
+			</div>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="dashboard.html">DASHBOARD</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link nav-active text-white" aria-current="page" href="#">CRIMES/INCIDENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="incidents.html">BLOTTER</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="announcements.html">ANNOUNCEMENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="clearance.html">DOCUMENT REQUESTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="users.html">USERS</a></li>
+						<li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+					</ul>
+			</div>
+		</nav>
+
+    <!-- content -->
+    <div class="row mx-auto">
+		<div class="col-4 rounded p-3 table-responsive shadow-sm ms-5 me-4 mt-4">
+			<div class="row">
+				<h4 id="tabTitle" class="col d-flex justify-content-center">Pending Crimes/Incidents</h4>
+				<hr class="mt-2">
+
+				<div id="map" class="google-map"></div>
+			</div>
+		</div>
+		
+		<div class="col-7 rounded p-3 table-responsive shadow-sm mt-4">
+			<div class="row">
+				<h4 id="tabTitle" class="col d-flex justify-content-center">Manage Crimes/Incidents</h4>
+				<hr class="mt-2">
+			</div>
+				
+			<div class="row">
+				<form class="col-12 col-lg-5 mx-auto d-none">
+					<div class="input-group">
+						<input id="etUid" type="text" class="form-control" placeholder="User ID" aria-label="User ID">
+						<button class="btn btn-primary search-button" type="button" id="btnFilterByUid">
+							<i class="fi fi-br-search text-light mx-3" style="font-size: 0.8rem;"></i>
+						</button>
+					</div>
+				</form>
+				
+				<form class="col-12 mx-auto">
+					<div class="input-group">
+						<input id="etFirstName" type="text" class="form-control" placeholder="First Name" aria-label="First Name">
+						<input id="etLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name">
+						<button class="btn btn-primary search-button" type="button" id="btnFilterByName">
+							<i class="fi fi-br-search text-light mx-3" style="font-size: 0.8rem;"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+	
+			<table class="table align-middle mt-2">
+				<thead>
+					<tr>
+						<th scope="col" class="col-1">Incident Date</th>
+						<th scope="col" class="col-1">Type</th>
+						<th scope="col" class="col-4">Details</th>
+						<th scope="col" class="col-1">Location</th>
+						<th scope="col" class="col-1">Persons Involved</th>
+						<th scope="col" class="col-1">Supporting Documents</th>
+						<th scope="col" class="col-1">Status</th>
+						<th scope="col" class="col-2">Action</th>
+					</tr>
+				</thead>
+				<tbody id="tbodyCrime"></tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Blotter Modal -->
+	<div id="modalBlotter" class="modal fade" tabindex="-1" aria-labelledby="tvAddCrime" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5">Blotter Details</h1>
+				<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-6">
+						<p id="tvBlotterDate">Date</p>
+					</div>
+					<div class="col-6 text-end">
+						<p id="tvStatus">Status</p>
+					</div>
+					<div class="col-12">
+						<h5 id="tvBlotterType">Blotter Type</h5>
+						<p id="tvBlotterLocation">Blotter Location</p>
+						<p id="tvBlotterDetails">Blotter Details</p>
+						<div class="col-12 text-center">
+							<button id="btnPersonsInvolved" class="btn btn-light px-4 fs-6">Persons Involved</button>
+							<button id="btnSupportingDocuments" class="btn btn-light px-4 fs-6">Documents</button>
+							<button id="btnBlotterAction" class="btn btn-success text-white px-4 fs-6 mt-2">Action</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+
+		<!-- Involved Persons Modal -->
+		<div id="modalInvolvedPersons" class="modal fade" tabindex="-1" aria-labelledby="tvAddCrime" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5">Involved Persons</h1>
+					<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div 	class="modal-body">
+					<div class="row">
+						<h6 class="col-4">Full Name</h6>
+						<h6 class="col-2">Involvement</h6>
+						<h6 class="col-2">Contact</h6>
+						<h6 class="col-4">Address</h6>
+					</div>
+					<div id="divInvolvedPersonsContainer"></div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!-- Supporting Documents Modal -->
+		<div id="modalSupportingDocuments" class="modal fade" tabindex="-1" aria-labelledby="tvAddCrime" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5">Supporting Documents</h1>
+					<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="divSupportingDocumentsContainer" class="row rounded col-12">
+						<p>There are no media attached to this report.</p>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+	<script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+		({key: "AIzaSyDi67EqoPXOjXwKYW2Q-Ehc2Mif_cMGLKM", v: "weekly"});</script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

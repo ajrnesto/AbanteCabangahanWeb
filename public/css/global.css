@@ -4,6 +4,21 @@ body, html {
 	height: 100%;
 }
 
-*:not(body) {
+.nav, .navbar, .table-responsive {
 	background-color: white;
+}
+
+/* *:not(body, .modal) {
+	background-color: white;
+} */
+
+#dpSchedule {
+	border: 1px solid #c5c5c5;
+	border-radius: 0.3em;
+	padding: 0.4em;
+}
+
+.google-map {
+	height: 100%; /* The height is 400 pixels */
+  padding-top: 100%; /* 16:9 Aspect Ratio */
 }

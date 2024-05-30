@@ -1,0 +1,32 @@
+body {
+	padding-top: 3em;
+	padding-bottom: 3em;
+	padding-left: 5em;
+	padding-right: 5em;
+}
+
+html, body {
+	background: white !important;
+}
+
+.document-content {
+	text-align: justify;
+	font-size: 12pt;
+}
+
+@media print {
+	.print-exceptions {
+		display: none;
+	}
+
+	body {
+		padding-top: 0em;
+		padding-bottom: 0em;
+		padding-left: 2em;
+		padding-right: 2em;
+	}
+
+	img {
+		width: 100px
+	}
+}

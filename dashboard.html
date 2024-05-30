@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+		<script type="module" src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+        <link rel="stylesheet" href="/css/main.min.css">
+        <link rel="stylesheet" href="/css/global.css">
+        <!-- <script type="module" src="/js/navbar-admin.js"></script> -->
+        <script type="module" src="/js/dashboard.js"></script>
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-straight.css'>
+</head>
+
+<body class="bg-light">
+	<nav class="navbar bg-primary navbar-expand-lg mb-2 shadow-sm px-4">
+		  <div class="col">
+			  <h1 class="text-light col-auto ms" style="font-family: Tilt Neon; font-size: 1.4rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;">Ariba!<span class="text-danger">Cabangahan</span></h1>
+		  </div>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+				  <ul class="navbar-nav ms-auto">
+						<li class="nav-item mx-2 my-auto"><a class="nav-link nav-active text-white" aria-current="page" href="#">DASHBOARD</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="blotter.html">CRIMES/INCIDENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="incidents.html">BLOTTER</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="announcements.html">ANNOUNCEMENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="clearance.html">DOCUMENT REQUESTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="users.html">USERS</a></li>
+						<li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+				  </ul>
+		  </div>
+	  </nav>
+
+	<div class="px-4 pt-4 pb-2">
+		<div class="row">
+			<div class="col-4 p-4">
+				<div id="cardCrimeReports" class="row rounded bg-white p-4 justify-content-center" role="button">
+					<div class="col-8 row">
+						<h6 id="tvCrimeReports" class="col-12 display-5 text-dark text-start mb-0 fw-bold">0</h3>
+						<p class="col-12 text-dark text-start mt-0 fw-bold">Active Crime Reports</p>
+					</div>
+					<div class="col-4 row">
+						<p class="col-2 text-dark text-center my-auto"><i class="fi fi-sr-badge-sheriff fs-1"></i></p>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-4 p-4">
+				<div id="cardDocumentRequests" class="row rounded bg-white p-4 justify-content-center" role="button">
+					<div class="col-8 row">
+						<h6 id="tvDocumentRequests" class="col-12 display-5 text-dark text-start mb-0 fw-bold">0</h3>
+						<p class="col-12 text-dark text-start mt-0 fw-bold">Document Requests</p>
+					</div>
+					<div class="col-4 row">
+						<p class="col-2 text-dark text-center my-auto"><i class="fi fi-sr-document fs-1"></i></p>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-4 p-4">
+				<div id="cardIncidentReports" class="row rounded bg-white p-4 justify-content-center" role="button">
+					<div class="col-8 row">
+						<h6 id="tvIncidentReports" class="col-12 display-5 text-dark text-start mb-0 fw-bold">0</h3>
+						<p class="col-12 text-dark text-start mt-0 fw-bold">Active Incident Reports</p>
+					</div>
+					<div class="col-4 row">
+						<p class="col-2 text-dark text-center my-auto"><i class="fi fi-sr-triangle-warning fs-1"></i></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12">
+			<div class="row">
+				<div class="col-4 p-4">
+					<div id="cardCrimeReportsHistory" class="row rounded bg-white p-4 justify-content-center" role="button">
+						<div class="row col-12 rounded bg-white justify-content-center">
+							<p class="col-12 text-dark text-start mt-0 fw-bold">Crime Reports History</p>
+							<p id="tvEmptyCrimeReportsHistory" class="d-none text-center mb-0 pb-0">No data to display</p>
+							<div id="divCrimeReportsHistory" class="d-none col-12 text-center">
+								<canvas id="chartCrimeReportsHistory"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-4 p-4">
+					<div id="cardDocumentRequestsChart" class="row rounded bg-white p-4 justify-content-center" role="button">
+						<div class="row col-12 rounded bg-white justify-content-center">
+							<p class="col-12 text-dark text-start mt-0 fw-bold">Document Requests</p>
+							<p id="tvEmptyDocumentRequestsChart" class="d-none text-center mb-0 pb-0">No data to display</p>
+							<div id="divDocumentRequestsChart" class="d-none col-12 text-center">
+								<canvas id="chartDocumentRequestsChart"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-4 p-4">
+					<div id="cardIncidentReportsHistory" class="row rounded bg-white p-4 justify-content-center" role="button">
+						<div class="row col-12 rounded bg-white justify-content-center">
+							<p class="col-12 text-dark text-start mt-0 fw-bold">Incident Reports History</p>
+							<p id="tvEmptyIncidentReportsHistory" class="d-none text-center mb-0 pb-0">No data to display</p>
+							<div id="divIncidentReportsHistory" class="d-none col-12 text-center">
+								<canvas id="chartIncidentReportsHistory"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

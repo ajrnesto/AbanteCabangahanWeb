@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Requests</title>
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <script type="module" src="/js/users.js"></script>
+</head>
+<body class="bg-light">
+    <!-- navigation bar -->
+    <nav class="navbar bg-primary navbar-expand-lg mb-2 shadow-sm px-4">
+			<div class="col">
+				<h1 class="text-light col-auto ms" style="font-family: Tilt Neon; font-size: 1.4rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;">Ariba!<span class="text-danger">Cabangahan</span></h1>
+			</div>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav nav-underline ms-auto">
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="dashboard.html">DASHBOARD</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="blotter.html">CRIMES/INCIDENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="incidents.html">BLOTTER</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="announcements.html">ANNOUNCEMENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="clearance.html">DOCUMENT REQUESTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link active text-white" aria-current="page" href="#">USERS</a></li>
+						<li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+					</ul>
+			</div>
+		</nav>
+		
+    <!-- content -->
+    <div class="rounded col-10 p-3 table-responsive shadow-sm mx-auto mt-4">
+			<h4 id="tabTitle" class="col d-flex justify-content-center">Manage Users</h4>
+			
+			<div class="row mt-3">
+				<form class="col-12 col-lg-5 mx-auto">
+					<div class="input-group">
+						<input id="etUid" type="text" class="form-control" placeholder="User ID" aria-label="User ID">
+						<button class="btn btn-primary search-button" type="button" id="btnFilterByUid">
+							<i class="fi fi-br-search text-light mx-3" style="font-size: 0.8rem;"></i>
+						</button>
+					</div>
+				</form>
+				
+				<form class="col-12 col-lg-7 mx-auto">
+					<div class="input-group">
+						<input id="etFirstName" type="text" class="form-control" placeholder="First Name" aria-label="First Name">
+						<input id="etLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name">
+						<button class="btn btn-primary search-button" type="button" id="btnFilterByName">
+							<i class="fi fi-br-search text-light mx-3" style="font-size: 0.8rem;"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+
+      <table class="table align-middle mt-2">
+				<thead>
+					<tr>
+							<th scope="col" class="col-2">UID</th>
+							<th scope="col" class="col-2">Name</th>
+							<th scope="col" class="col-1">Mobile</th>
+							<th scope="col" class="col-1">Email</th>
+							<th scope="col" class="col-1">Birth Date</th>
+							<th scope="col" class="col-1">Document Requests</th>
+					</tr>
+				</thead>
+      	<tbody id="tbodyUsers"></tbody>
+      </table>
+    </div>
+
+		<div id="modalViewUserActivity" class="modal fade" tabindex="-1" aria-labelledby="tvUserName" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 id="tvUserName" class="modal-title fs-5 text-primary">Document Requests</h1>
+						<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body bg-light">
+						
+						<h5>Document Requests</h5>
+						<div class="row">
+							<p class="col-6 my-auto">Barangay Clearance</p>
+							<div class="col-6">
+								<button id="btnViewClearanceHistory" type="button" class="btn btn-primary px-3 float-end" data-bs-dismiss="modal" aria-label="View">View</button>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<p class="col-6 my-auto">Certificate of Residency</p>
+							<div class="col-6">
+								<button id="btnViewResidencyHistory" type="button" class="btn btn-primary px-3 float-end" data-bs-dismiss="modal" aria-label="View">View</button>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<p class="col-6 my-auto">Certificate of Indigency</p>
+							<div class="col-6">
+								<button id="btnViewIndigencyHistory" type="button" class="btn btn-primary px-3 float-end" data-bs-dismiss="modal" aria-label="View">View</button>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<p class="col-6 my-auto">Barangay Business Permit</p>
+							<div class="col-6">
+								<button id="btnViewBusinessHistory" type="button" class="btn btn-primary px-3 float-end" data-bs-dismiss="modal" aria-label="View">View</button>
+							</div>
+						</div>
+						<hr>
+						<h5 class="mt-3">Incident Reports</h5>
+						<div class="row mt-2">
+							<p class="col-6 my-auto">Crime Reports</p>
+							<div class="col-6">
+								<button id="btnViewCrimeReportsHistory" type="button" class="btn btn-primary px-3 float-end" data-bs-dismiss="modal" aria-label="View">View</button>
+							</div>
+						</div>
+						<div class="row mt-2">
+							<p class="col-6 my-auto">Incident Reports</p>
+							<div class="col-6">
+								<button id="btnViewIncidentReportsHistory" type="button" class="btn btn-primary px-3 float-end" data-bs-dismiss="modal" aria-label="View">View</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Crime Reports</title>
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/news.css">
+    <script type="module" src="/js/crimes.js"></script>
+</head>
+
+<body class="bg-light">
+    <!-- navigation bar -->
+    <nav class="navbar bg-primary navbar-expand-lg mb-2 shadow-sm px-4">
+			<div class="col">
+				<h1 class="text-light col-auto ms" style="font-family: Tilt Neon; font-size: 1.4rem; -webkit-user-select: none; -ms-user-select: none; user-select: none;">Ariba!<span class="text-danger">Cabangahan</span></h1>
+			</div>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="dashboard.html">DASHBOARD</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link nav-active text-white" aria-current="page" href="#">CRIME REPORTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="incidents.html">INCIDENT REPORTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="announcements.html">ANNOUNCEMENTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="clearance.html">DOCUMENT REQUESTS</a></li>
+						<li class="nav-item mx-2 my-auto"><a class="nav-link text-light" href="users.html">USERS</a></li>
+						<li class="nav-item my-auto"><button id="btnLogout" type="button" class="btn btn-no-border btn-outline-danger">LOG OUT</button></li>
+					</ul>
+			</div>
+		</nav>
+
+    <!-- content -->
+    <div class="rounded p-3 table-responsive shadow-sm mx-4 mt-4">
+		<div class="row">
+			<h4 id="tabTitle" class="col d-flex justify-content-center">Manage Crime Reports</h4>
+			<hr class="mt-2">
+		</div>
+			
+		<div class="row">
+			<form class="col-12 col-lg-5 mx-auto d-none">
+				<div class="input-group">
+					<input id="etUid" type="text" class="form-control" placeholder="User ID" aria-label="User ID">
+					<button class="btn btn-primary search-button" type="button" id="btnFilterByUid">
+						<i class="fi fi-br-search text-light mx-3" style="font-size: 0.8rem;"></i>
+					</button>
+				</div>
+			</form>
+			
+			<form class="col-12 col-lg-7 mx-auto">
+				<div class="input-group">
+					<input id="etFirstName" type="text" class="form-control" placeholder="First Name" aria-label="First Name">
+					<input id="etLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name">
+					<button class="btn btn-primary search-button" type="button" id="btnFilterByName">
+						<i class="fi fi-br-search text-light mx-3" style="font-size: 0.8rem;"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+
+        <table class="table align-middle mt-2">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-1">Incident Date</th>
+										<th scope="col" class="col-1">Type</th>
+                    <th scope="col" class="col-4">Details</th>
+                    <th scope="col" class="col-1">Location</th>
+                    <th scope="col" class="col-1">Persons Involved</th>
+                    <th scope="col" class="col-1">Supporting Documents</th>
+                    <th scope="col" class="col-1">Status</th>
+                    <th scope="col" class="col-2">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyCrime"></tbody>
+        </table>
+    </div>
+
+		<!-- Involved Persons Modal -->
+		<div id="modalInvolvedPersons" class="modal fade" tabindex="-1" aria-labelledby="tvAddCrime" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5">Involved Persons</h1>
+					<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div 	class="modal-body">
+					<div class="row">
+						<h6 class="col-4">Full Name</h6>
+						<h6 class="col-2">Involvement</h6>
+						<h6 class="col-2">Contact</h6>
+						<h6 class="col-4	">Address</h6>
+					</div>
+					<div id="divInvolvedPersonsContainer"></div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!-- Supporting Documents Modal -->
+		<div id="modalSupportingDocuments" class="modal fade" tabindex="-1" aria-labelledby="tvAddCrime" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5">Supporting Documents</h1>
+					<button id="btnCloseModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="divSupportingDocumentsContainer" class="row rounded col-12">
+						<p>There are no media attached to this report.</p>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
